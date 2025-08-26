@@ -5,54 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sahil Wadhwa - Portfolio</title>
   <style>
-    body { font-family: Times New Roman, sans-serif; margin:0; padding:0; background:#f9f9f9; color:#333; }
-    header { background:#0a66c2; color:#fff; padding:2rem; text-align:center; }
-    header h1 { margin:0; font-size:2rem; }
-    header p { margin:0.5rem 0; }
-    main { max-width:900px; margin:auto; padding:2rem; }
-    section { margin-bottom:2rem; }
-    h2 { color:#0a66c2; border-bottom:2px solid #ddd; padding-bottom:0.5rem; }
+    /* General Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      background:#0a0a0a; 
+      color:#eee; 
+      line-height:1.6; 
+    }
+
+    /* Header / Hero */
+    header { 
+      background: linear-gradient(135deg,#0a0f3c,#0e1e6a,#0a66c2); 
+      color:#fff; 
+      padding:4rem 2rem; 
+      text-align:center;
+    }
+    .hero { 
+      display:flex; flex-wrap:wrap; justify-content:center; 
+      align-items:center; gap:2rem; max-width:1100px; margin:auto; 
+    }
+    .hero-text h1 { 
+      font-size:2.8rem; 
+      text-shadow:0 0 10px cyan; 
+    }
+    .hero-text p { font-size:1.2rem; margin-top:0.5rem; }
+    .hero img { 
+      width:200px; height:200px; border-radius:50%; 
+      border:4px solid cyan; object-fit:cover; 
+      box-shadow:0 0 20px cyan; 
+    }
+
+    /* Navigation */
+    nav { 
+      background:#111; 
+      position:sticky; top:0; z-index:1000; 
+      box-shadow:0 0 15px #0ff; 
+    }
+    nav ul { 
+      display:flex; justify-content:center; 
+      list-style:none; padding:1rem; gap:2rem; 
+    }
+    nav a { 
+      color:#0ff; text-decoration:none; font-weight:bold; 
+      transition:0.3s; 
+    }
+    nav a:hover { color:#fff; text-shadow:0 0 10px #0ff; }
+
+    /* Main Content */
+    main { max-width:1000px; margin:auto; padding:2rem; }
+    section { margin-bottom:3rem; }
+    h2 { 
+      font-size:1.8rem; 
+      color:#0ff; 
+      margin-bottom:1rem; 
+      text-shadow:0 0 10px #0ff; 
+      border-bottom:1px solid #222; 
+      padding-bottom:0.5rem; 
+    }
     ul { list-style:none; padding-left:0; }
-    ul li::before { content:"✔ "; color:#0a66c2; }
-    footer { text-align:center; padding:1rem; background:#222; color:#ddd; }
-    a { color:#0a66c2; text-decoration:none; }
-    a:hover { text-decoration:underline; }
+    ul li::before { content:"➤ "; color:#0ff; }
+    ul li { padding:0.5rem 0; }
+    ul li:hover { background:#111; border-radius:8px; padding-left:8px; }
+
+    /* Certificates Gallery */
+    .certificates { 
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); 
+      gap:1.5rem; margin-top:1rem; 
+    }
+    .certificates img { 
+      width:100%; border-radius:12px; 
+      box-shadow:0 0 15px rgba(0,255,255,0.6); 
+      transition:transform 0.4s, box-shadow 0.4s; 
+    }
+    .certificates img:hover { 
+      transform:scale(1.05); 
+      box-shadow:0 0 25px cyan; 
+    }
+
+    /* Buttons */
+    .btn { 
+      display:inline-block; margin-top:1rem; 
+      background:#111; color:#0ff; padding:10px 18px; 
+      border-radius:8px; border:1px solid #0ff; 
+      text-decoration:none; font-weight:bold; 
+      box-shadow:0 0 10px #0ff, inset 0 0 5px #0ff; 
+      transition:0.3s; 
+    }
+    .btn:hover { 
+      background:#0ff; color:#000; 
+      box-shadow:0 0 20px #0ff, 0 0 40px #0ff; 
+    }
+
+    /* Contact */
+    .contact-info { text-align:center; margin-top:1rem; }
+
+    /* Footer */
+    footer { 
+      text-align:center; padding:1rem; 
+      background:#111; color:#aaa; 
+      font-size:0.9rem; 
+      border-top:1px solid #222; 
+      box-shadow:0 -2px 10px #0ff; 
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Sahil Wadhwa</h1>
-    <p>☎ +91-8800249069 | ✉ www.sahilwadhwa520@gmail.com
-    <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank">LinkedIn Profile</a></p>
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Hi, I am Sahil Wadhwa</h1>
+        <p>An Accountant & Aspiring Data Analyst</p>
+        <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p>
+        <a href="Sahil_Wadhwa_CV.pdf" download class="btn">Download Resume</a>
+      </div>
+      <img src="your-photo.jpg" alt="Sahil Wadhwa">
+    </div>
   </header>
 
+  <nav>
+    <ul>
+      <li><a href="#summary">Summary</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#languages">Languages</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
   <main>
-    <section>
+    <section id="summary">
       <h2>Professional Summary</h2>
       <p>Dedicated and detail-oriented accounting professional with 3+ years of experience in managing financial operations, finalizing accounts, statutory filings, and assisting in audits. Proficient in Tally, Cleartax, Suvit, and ROC compliance. Known for delivering accurate and timely reports with a focus on regulatory compliance and efficiency.</p>
     </section>
 
-    <section>
+    <section id="skills">
       <h2>Key Skills</h2>
       <ul>
-        <li>Finalization of Accounts</li>            
-        <li>GST & TDS Return Filing</li>                
-        <li>Audit Assistance</li>
-        <li>ROC Compliance</li>
-        <li>E-invoicing & E-way Bills</li>
-        <li>Spreadsheets</li>
-        <li>GenAI Data Insights</li>
-        <li>Bank Reconciliation</li>
-        <li>Tally ERP 9, Tally Prime</li>
-        <li>Cleartax & Suvit</li>
-        <li>Time Management</li>
-        <li>MS Office</li>
-        <li>Tableau</li>
-        <li>Business Communication</li>
+        <li><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</li>
+        <li><b>GST & TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</li>
+        <li><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</li>
+        <li><b>ROC Compliance</b> – Handling annual ROC filings, MCA forms, and ensuring corporate governance requirements.</li>
+        <li><b>E-invoicing & E-way Bills</b> – Generating and managing e-invoices and e-way bills as per government regulations.</li>
+        <li><b>Accounting Software</b> – Skilled in Tally ERP 9, Tally Prime, Cleartax, and Suvit for automation and reporting.</li>
+        <li><b>Bank Reconciliation & Payments</b> – Accurate reconciliation of bank accounts, vendor payments, and receivables.</li>
+        <li><b>Data Analytics & Visualization</b> – Proficient in Tableau, Excel, and GenAI tools for exploratory data analysis and dashboards.</li>
+        <li><b>Spreadsheets & MS Office</b> – Strong command over Excel (formulas, pivot tables), Word, and PowerPoint for reporting.</li>
+        <li><b>Business Communication & Time Management</b> – Ability to present financial data clearly and meet deadlines effectively.</li>
       </ul>
     </section>
 
-    <section>
+    <section id="work">
       <h2>Work History</h2>
       <h3>Accountant — Smita Patni Associates, New Delhi <span>(March 2024 – Present)</span></h3>
       <p>Finalization of accounts for both corporate and individual clients. Managed daily accounting entries, generated e-invoices, assisted in statutory and internal audits, ensured compliance with TDS, ITR filing, and ROC requirements. Worked on ClearTax and Suvit for automation and reporting.</p>
@@ -61,31 +166,35 @@
       <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices & e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
     </section>
 
-    <section>
-      <h2>Certifications</h2>
+    <section id="certificates">
+      <h2>Certificates</h2>
       <ul>
         <li><b>Tata Group Data Analytics Job Simulation</b> (Aug 2025) – AI-powered data analytics, EDA, predictive modeling & AI-driven strategy.</li>
         <li><b>Deloitte Australia Data Analytics Job Simulation</b> (Aug 2025) – Data analysis, Tableau dashboards, Excel classification.</li>
         <li><b>AI For All (Digital India × Intel)</b> (Aug 2025) – AI fundamentals & applications.</li>
       </ul>
+      <div class="certificates">
+        <a href="certificate1.jpg" target="_blank"><img src="certificate1.jpg" alt="Certificate 1"></a>
+        <a href="certificate2.jpg" target="_blank"><img src="certificate2.jpg" alt="Certificate 2"></a>
+        <a href="certificate3.jpg" target="_blank"><img src="certificate3.jpg" alt="Certificate 3"></a>
+      </div>
     </section>
 
-    <section>
-      <h2>Education</h2>
-      <ul>
-        <li>Bachelor of Commerce (Result Awaited – IGNOU)</li>
-        <li>12th CBSE, 2022</li>
-        <li>10th CBSE, 2020</li>
-      </ul>
-    </section>
-
-    <section>
+    <section id="languages">
       <h2>Languages</h2>
       <ul>
         <li>Punjabi</li>
         <li>English</li>
         <li>Hindi</li>
       </ul>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="contact-info">
+        <p>☎ +91-8800249069</p>
+        <p>✉ sahilwadhwa520@gmail.com</p>
+      </div>
     </section>
   </main>
 
@@ -94,4 +203,3 @@
   </footer>
 </body>
 </html>
-
