@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelance Services - Sahil Wadhwa</title>
+  <style>
+    /* General Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body { 
+      font-family: 'Segoe UI', sans-serif; 
+      background:#0a0a0a; 
+      color:#eee; 
+      line-height:1.6; 
+    }
+
+    /* Header */
+    header { 
+      background: linear-gradient(135deg,#0a0f3c,#0e1e6a,#0a66c2); 
+      color:#fff; 
+      padding:3rem 2rem; 
+      text-align:center;
+    }
+    header h1 { font-size:2.5rem; text-shadow:0 0 12px cyan; }
+    header p { font-size:1.2rem; margin-top:0.5rem; }
+
+    /* Navigation */
+    nav { 
+      background:#111; 
+      position:sticky; top:0; z-index:1000; 
+      box-shadow:0 0 15px #0ff; 
+    }
+    nav ul { 
+      display:flex; justify-content:center; flex-wrap:wrap;
+      list-style:none; padding:1rem; gap:1.2rem; 
+    }
+    nav a { 
+      color:#0ff; text-decoration:none; font-weight:bold; 
+      transition:0.3s; 
+    }
+    nav a:hover { color:#fff; text-shadow:0 0 10px #0ff; }
+
+    /* Main Content */
+    main { max-width:1000px; margin:auto; padding:2rem; }
+    section { margin-bottom:3rem; }
+    h2 { 
+      font-size:1.8rem; 
+      color:#0ff; 
+      margin-bottom:1rem; 
+      text-shadow:0 0 10px #0ff; 
+      border-bottom:1px solid #222; 
+      padding-bottom:0.5rem; 
+    }
+
+    ul { list-style:none; padding-left:0; }
+    ul li::before { 
+      content:"★ "; 
+      color:#0ff; 
+      text-shadow:0 0 8px #0ff; 
+    }
+    ul li { padding:0.5rem 0; }
+
+    /* Buttons */
+    .btn { 
+      display:inline-block; margin-top:1rem; 
+      background:#111; color:#0ff; padding:10px 18px; 
+      border-radius:8px; border:1px solid #0ff; 
+      text-decoration:none; font-weight:bold; 
+      box-shadow:0 0 10px #0ff, inset 0 0 5px #0ff; 
+      transition:0.3s; 
+    }
+    .btn:hover { 
+      background:#0ff; color:#000; 
+      box-shadow:0 0 20px #0ff, 0 0 40px #0ff; 
+    }
+
+    /* Footer */
+    footer { 
+      text-align:center; padding:1rem; 
+      background:#111; color:#aaa; 
+      font-size:0.9rem; 
+      border-top:1px solid #222; 
+      box-shadow:0 -2px 10px #0ff; 
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header h1 { font-size:2rem; }
+      header p { font-size:1rem; }
+      main { padding:1rem; }
+    }
+    @media (max-width: 480px) {
+      h2 { font-size:1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Freelance Services</h1>
+    <p>Accounting, Taxation & Compliance Solutions</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>My Services</h2>
+      <ul>
+        <li>Income Tax Return (ITR) Filing</li>
+        <li>TDS Return Filing</li>
+        <li>GST Registration & Monthly/Quarterly Returns</li>
+        <li>Digital Signature Certificate (DSC) Application</li>
+        <li>Trademark Application & Assistance</li>
+        <li>Company Registration (Private Limited, LLP, OPC)</li>
+        <li>ROC Compliance & Annual Filings</li>
+        <li>E-invoicing & E-way Bill Support</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Why Work With Me?</h2>
+      <ul>
+        <li>3+ years of professional accounting & compliance experience</li>
+        <li>Accurate, timely, and compliance-focused services</li>
+        <li>Affordable freelance rates</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Contact Me</h2>
+      <p>If you need help with tax filing, compliance, or registrations — reach out directly:</p>
+      <p>☎ <b>+91-8800249069</b></p>
+      <p>✉ <b>sahilwadhwa520@gmail.com</b></p>
+      <p><a href="mailto:sahilwadhwa520@gmail.com" class="btn">Send Email</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sahil Wadhwa | Freelance Services</p>
+  </footer>
+</body>
+</html>
