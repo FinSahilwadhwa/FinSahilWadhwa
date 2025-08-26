@@ -32,7 +32,8 @@
     }
     .hero-text p { font-size:1.2rem; margin-top:0.5rem; }
     .hero img { 
-      width:200px; height:200px; border-radius:50%; 
+      width:200px; max-width:40vw;
+      height:auto; border-radius:50%; 
       border:4px solid cyan; object-fit:cover; 
       box-shadow:0 0 20px cyan; 
     }
@@ -44,8 +45,8 @@
       box-shadow:0 0 15px #0ff; 
     }
     nav ul { 
-      display:flex; justify-content:center; 
-      list-style:none; padding:1rem; gap:2rem; 
+      display:flex; justify-content:center; flex-wrap:wrap;
+      list-style:none; padding:1rem; gap:1.2rem; 
     }
     nav a { 
       color:#0ff; text-decoration:none; font-weight:bold; 
@@ -75,9 +76,12 @@
       gap:1.5rem; margin-top:1rem; 
     }
     .certificates img { 
-      width:100%; border-radius:12px; 
+      width:100%; height:auto;
+      border-radius:12px; 
       box-shadow:0 0 15px rgba(0,255,255,0.6); 
       transition:transform 0.4s, box-shadow 0.4s; 
+      object-fit:contain;
+      background:#000;
     }
     .certificates img:hover { 
       transform:scale(1.05); 
@@ -109,6 +113,22 @@
       border-top:1px solid #222; 
       box-shadow:0 -2px 10px #0ff; 
     }
+
+    /* ✅ Responsive Fixes */
+    @media (max-width: 768px) {
+      .hero { flex-direction:column; text-align:center; }
+      .hero-text h1 { font-size:2rem; }
+      .hero-text p { font-size:1rem; }
+      nav ul { gap:0.8rem; }
+      main { padding:1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero img { width:120px; }
+      .hero-text h1 { font-size:1.6rem; }
+      h2 { font-size:1.4rem; }
+      .certificates { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
@@ -116,7 +136,7 @@
     <div class="hero">
       <div class="hero-text">
         <h1>Hi, I am Sahil Wadhwa</h1>
-        <p>An Accountant with 3+ Years Experience </p
+        <p>An Accountant with 3+ Years Experience</p>
       </div>
       <img src="447249813_1203509420712582_6993872872281139809_n..webp.jpg" alt="Sahil Wadhwa">
     </div>
@@ -172,27 +192,25 @@
         <li><b>AI For All (Digital India × Intel)</b> (Aug 2025) – AI fundamentals & applications.</li>
       </ul>
       <div class="certificates">
-        <a href="tata certificate -page-001.jpg" target="_blank"><img src="certificate1.jpg" alt="Tata Group Certificate "></a>
-        <a href="Deloitte Certificate-page-001.jpg" target="_blank"><img src="certificate2.jpg" alt="Deloitte Certificate "></a>
-        <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank"><img src="certificate3.jpg" alt="Ai Aware Certificate "></a>
-        <a href="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" target="_blank"><img src="certificate4.jpg" alt="Ai Appreciate Certificate "></a>
+        <a href="tata certificate -page-001.jpg" target="_blank"><img src="tata certificate -page-001.jpg" alt="Tata Group Certificate"></a>
+        <a href="Deloitte Certificate-page-001.jpg" target="_blank"><img src="Deloitte Certificate-page-001.jpg" alt="Deloitte Certificate"></a>
+        <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" alt="AI Aware Certificate"></a>
+        <a href="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" alt="AI Appreciate Certificate"></a>
       </div>
-    </section>
-      </ul>
     </section>
 
     <section id="contact">
       <h2>Contact Me</h2>
       <div class="contact-info">
         <p>☎ +91-8800249069</p>
-        <p>✉ www.sahilwadhwa520@gmail.com</p>
-        <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p
+        <p>✉ sahilwadhwa520@gmail.com</p>
+        <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Sahil Wadhwa </p>
+    <p>&copy; 2025 Sahil Wadhwa</p>
   </footer>
 </body>
 </html>
