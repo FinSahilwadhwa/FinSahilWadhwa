@@ -311,4 +311,15 @@
 
     toggleButton.addEventListener('click', () => {
       body.classList.toggle('light-mode');
-      if(body.classList.contains
+
+      if(body.classList.contains('light-mode')){
+        toggleButton.textContent = '☀️';
+        localStorage.setItem('theme', 'light');
+      } else {
+        toggleButton.textContent = '🌙';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>
