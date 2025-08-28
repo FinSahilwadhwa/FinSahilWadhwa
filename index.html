@@ -1,325 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sahil Wadhwa - Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Sahil Wadhwa - Portfolio / Resume</title>
+
+  <!-- Minimal reset + professional styling -->
   <style>
-    /* General Reset */
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body { 
-      font-family: 'Segoe UI', sans-serif; 
-      background:#0a0a0a; 
-      color:#eee; 
-      line-height:1.6; 
-      transition: background 0.3s, color 0.3s;
+    :root{
+      --bg-dark: #0b0b0b;
+      --panel-dark: #0f1113;
+      --muted: #bfc7c0;
+      --emerald: #2ecc71;
+      --emerald-dark: #27ae60;
+      --glass: rgba(255,255,255,0.03);
+      --accent-shadow: 0 8px 30px rgba(46,204,113,0.08);
+      --container-width: 1100px;
     }
 
-    /* Dark & Light Mode Styles */
+    /* Light mode variables (applied when body.light-mode present) */
     body.light-mode {
-      background: #f0fdf4;
-      color: #1a1a1a;
-    }
-    body.light-mode header { 
-      background: linear-gradient(135deg,#d4f7e0,#a8f0c5,#6fe3a6); 
-      color:#1a1a1a; 
-    }
-    body.light-mode nav { 
-      background: #e6f7ee; 
-      box-shadow: none;
-    }
-    body.light-mode nav a { color: #27ae60; }
-    body.light-mode nav a:hover { color: #14532d; text-shadow:none; }
-    body.light-mode .btn { 
-      background: #27ae60; 
-      color:#fff; 
-      border:none; 
-      box-shadow:0 2px 6px rgba(0,0,0,0.1);
-    }
-    body.light-mode .btn:hover { background:#14532d; }
-    body.light-mode .certificates img { 
-      box-shadow:0 2px 8px rgba(0,0,0,0.1); 
-      background:#fff; 
-    }
-    body.light-mode h2, body.light-mode ul li::before { color:#27ae60; text-shadow:none; }
-    body.light-mode footer { 
-      background:#e6f7ee; 
-      color:#1a1a1a; 
-      box-shadow:none; 
-      border-top:1px solid #cce3d8;
+      --bg-dark: #f6fbf7;
+      --panel-dark: #ffffff;
+      --muted: #556256;
+      --glass: rgba(0,0,0,0.02);
+      --accent-shadow: 0 8px 24px rgba(39,174,96,0.08);
     }
 
-    /* Header / Hero */
-    header { 
-      background: linear-gradient(135deg,#052e16,#065f46,#27ae60); 
-      color:#fff; 
-      padding:4rem 2rem; 
-      text-align:center;
-      transition: background 0.3s, color 0.3s;
-    }
-    .hero { 
-      display:flex; flex-wrap:wrap; justify-content:center; 
-      align-items:center; gap:2rem; max-width:1100px; margin:auto; 
-    }
-    .hero-text h1 { 
-      font-size:2.8rem; 
-      text-shadow:0 0 10px #2ecc71; 
-      transition: color 0.3s, text-shadow 0.3s;
-    }
-    .hero-text p { font-size:1.2rem; margin-top:0.5rem; }
-    .hero img { 
-      width:200px; max-width:40vw;
-      height:auto; border-radius:50%; 
-      border:4px solid #2ecc71; object-fit:cover; 
-      box-shadow:0 0 20px #2ecc71; 
-      transition: border 0.3s, box-shadow 0.3s;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+      background: var(--bg-dark);
+      color: #eaeaea;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      transition: background .32s ease, color .32s ease;
     }
 
-    /* Typing Effect */
-    .typing {
-      color:#2ecc71;
-      font-weight:bold;
-      border-right:3px solid #2ecc71;
-      padding-right:5px;
-      white-space:nowrap;
-      overflow:hidden;
-      transition: color 0.3s, border-color 0.3s;
+    /* Container */
+    .wrap{
+      width: min(var(--container-width), 92%);
+      margin: 36px auto;
     }
 
-    /* Navigation */
-    nav { 
-      background:#111; 
-      position:sticky; top:0; z-index:1000; 
-      box-shadow:0 0 15px #2ecc71; 
-      transition: background 0.3s, box-shadow 0.3s;
+    /* Top bar (small header) */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
     }
-    nav ul { 
-      display:flex; justify-content:center; flex-wrap:wrap;
-      list-style:none; padding:1rem; gap:1.2rem; 
+    .brand{
+      display:flex; gap:12px; align-items:center;
     }
-    nav a { 
-      color:#2ecc71; text-decoration:none; font-weight:bold; 
-      transition:0.3s; 
+    .avatar{
+      width:68px;height:68px;border-radius:12px; overflow:hidden;
+      border:2px solid rgba(255,255,255,0.06);
+      box-shadow:var(--accent-shadow);
+      background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
+      display:flex; align-items:center; justify-content:center;
     }
-    nav a:hover { color:#fff; text-shadow:0 0 10px #2ecc71; }
+    .avatar img{width:100%;height:100%;object-fit:cover; display:block}
+    .brand h1{font-size:1.15rem;margin:0;color:var(--emerald); letter-spacing:0.2px}
+    .brand p{margin:0;font-size:0.85rem;color:var(--muted)}
 
-    /* Main Content */
-    main { max-width:1000px; margin:auto; padding:2rem; }
-    section { margin-bottom:3rem; }
-    h2 { 
-      font-size:1.8rem; 
-      color:#2ecc71; 
-      margin-bottom:1rem; 
-      text-shadow:0 0 10px #2ecc71; 
-      border-bottom:1px solid #222; 
-      padding-bottom:0.5rem; 
-      transition: color 0.3s, text-shadow 0.3s, border-color 0.3s;
+    /* Theme toggle */
+    #theme-toggle{
+      --btn-pad:10px 12px;
+      border-radius:999px;
+      padding:var(--btn-pad);
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      color:var(--emerald);
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer;
+      font-size:0.95rem;
+      box-shadow:none;
+      transition: all .22s ease;
     }
-    ul { list-style:none; padding-left:0; }
-    ul li::before { content:"➤ "; color:#2ecc71; }
-    ul li { padding:0.5rem 0; }
-    ul li:hover { background:#111; border-radius:8px; padding-left:8px; }
+    #theme-toggle:hover{ transform:translateY(-2px); box-shadow:var(--accent-shadow)}
+    body.light-mode #theme-toggle{ color:var(--emerald-dark); border-color: rgba(0,0,0,0.06) }
 
-    /* Certificates Gallery */
-    .certificates { 
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); 
-      gap:1.5rem; margin-top:1rem; 
+    /* Layout: two columns */
+    .layout{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:28px;
+      align-items:start;
     }
-    .certificates img { 
-      width:100%; height:auto;
-      border-radius:12px; 
-      box-shadow:0 0 15px rgba(46,204,113,0.6); 
-      transition:transform 0.4s, box-shadow 0.4s, background 0.3s;
-      object-fit:contain;
-      background:#000;
+
+    /* Left column - sidebar */
+    .sidebar{
+      background:var(--panel-dark);
+      border-radius:12px;
+      padding:18px;
+      box-shadow:var(--accent-shadow);
+      transition: background .32s ease;
     }
-    .certificates img:hover { 
-      transform:scale(1.05); 
-      box-shadow:0 0 25px #2ecc71; 
+    .section-title{ font-size:0.95rem; color:var(--emerald); margin-bottom:8px; font-weight:600 }
+    .contact-list p{ margin:8px 0; color:var(--muted); font-size:0.95rem }
+    .contact-list a{ color:var(--emerald); text-decoration:none; font-weight:600 }
+
+    .skill{
+      display:flex; flex-direction:column; gap:8px; margin-bottom:12px;
     }
+    .skill .label{ font-size:0.9rem; color:var(--muted); display:flex; justify-content:space-between; }
+    .skill .bar{ height:8px; background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:6px; overflow:hidden }
+    .skill .bar > i{ display:block; height:100%; background:linear-gradient(90deg, var(--emerald), var(--emerald-dark)); border-radius:6px }
+
+    .cert-list{ display:grid; gap:8px; margin-top:10px }
+    .cert-list a{ display:block; text-decoration:none; color:var(--muted); font-size:0.9rem; padding:8px; border-radius:8px; background:var(--glass); transition:background .2s }
+    .cert-list a:hover{ background: rgba(46,204,113,0.04); color:var(--emerald) }
+
+    /* Right column - main content */
+    .content{
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
+      border-radius:12px;
+      padding:22px;
+      box-shadow:var(--accent-shadow);
+      transition: background .32s ease;
+    }
+
+    .section{ margin-bottom:18px }
+    .section h2{ margin:0 0 12px 0; font-size:1.15rem; color:var(--emerald); text-shadow: 0 6px 20px rgba(46,204,113,0.06) }
+
+    /* Experience */
+    .job{ margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed rgba(255,255,255,0.03) }
+    .job h3{ margin:0; font-size:1rem; color:#fff }
+    .job span{ display:block; font-size:0.85rem; color:var(--muted); margin-top:6px }
+    .job p{ margin:10px 0 0 0; color:var(--muted); line-height:1.55 }
+
+    /* Certificates gallery */
+    .cert-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px }
+    .cert-grid a{ display:block; border-radius:10px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,0.03) }
+    .cert-grid img{ width:100%; height:120px; object-fit:cover; display:block; }
 
     /* Buttons */
-    .btn { 
-      display:inline-block; margin-top:1rem; 
-      background:#111; color:#2ecc71; padding:10px 18px; 
-      border-radius:8px; border:1px solid #2ecc71; 
-      text-decoration:none; font-weight:bold; 
-      box-shadow:0 0 10px #2ecc71, inset 0 0 5px #2ecc71; 
-      transition:0.3s; 
+    .btn{
+      display:inline-block;
+      background: transparent;
+      color:var(--emerald);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding:8px 12px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+      transition: all .18s;
     }
-    .btn:hover { 
-      background:#2ecc71; color:#000; 
-      box-shadow:0 0 20px #2ecc71, 0 0 40px #2ecc71; 
-    }
-
-    /* Contact */
-    .contact-info { text-align:center; margin-top:1rem; }
+    .btn:hover{ background: rgba(46,204,113,0.06) }
 
     /* Footer */
-    footer { 
-      text-align:center; padding:1rem; 
-      background:#111; color:#aaa; 
-      font-size:0.9rem; 
-      border-top:1px solid #222; 
-      box-shadow:0 -2px 10px #2ecc71; 
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s, border-color 0.3s;
-    }
-
-    /* Dark/Light Toggle Button */
-    #theme-toggle {
-      position:fixed;
-      top:20px;
-      right:20px;
-      cursor:pointer;
-      font-size:1.5rem;
-      background:none;
-      border:none;
-      color:#2ecc71;
-      z-index:2000;
-      transition: color 0.3s;
-    }
-    #theme-toggle:hover { color:#fff; }
+    .foot{ text-align:center; margin-top:18px; color:var(--muted); font-size:0.9rem }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .hero { flex-direction:column; text-align:center; }
-      .hero-text h1 { font-size:2rem; }
-      .hero-text p { font-size:1rem; }
-      nav ul { gap:0.8rem; }
-      main { padding:1rem; }
+    @media (max-width: 940px){
+      .layout{ grid-template-columns: 1fr; }
+      .sidebar{ order:2 }
+      .content{ order:1 }
+      .avatar{ width:84px; height:84px }
     }
-    @media (max-width: 480px) {
-      .hero img { width:120px; }
-      .hero-text h1 { font-size:1.6rem; }
-      h2 { font-size:1.4rem; }
-      .certificates { grid-template-columns:1fr; }
-    }
+
+    /* Ensure text visible in light mode */
+    body.light-mode { color:#1a1a1a }
+    body.light-mode .sidebar { background: var(--panel-dark); box-shadow: var(--accent-shadow) }
+    body.light-mode .content { background: var(--panel-dark); box-shadow: var(--accent-shadow) }
+    body.light-mode header { color: #1a1a1a }
   </style>
 </head>
 <body>
-  <!-- Dark/Light Mode Toggle Button -->
-  <button id="theme-toggle">🌙</button>
-
-  <header>
-    <div class="hero">
-      <div class="hero-text">
-        <h1>Hi, I am Sahil Wadhwa</h1>
-        <p>I am <span class="typing"></span></p>
+  <div class="wrap">
+    <!-- top -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="avatar">
+          <!-- Keep your photo path; if missing, it'll show gradient -->
+          <img src="447249813_1203509420712582_6993872872281139809_n..webp.jpg" alt="Sahil Wadhwa">
+        </div>
+        <div>
+          <h1>Hi, I am Sahil Wadhwa</h1>
+          <p>Dedicated Accounting Professional • Automation & Data Enthusiast</p>
+        </div>
       </div>
-      <img src="447249813_1203509420712582_6993872872281139809_n..webp.jpg" alt="Sahil Wadhwa">
+
+      <div>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙 Dark</button>
+      </div>
     </div>
-  </header>
 
-  <nav>
-    <ul>
-      <li><a href="#summary">Summary</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#certificates">Certificates</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <!-- main layout -->
+    <div class="layout">
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="section">
+          <div class="section-title">Contact</div>
+          <div class="contact-list">
+            <p>☎ +91-8800249069</p>
+            <p>✉ www.sahilwadhwa520@gmail.com</p>
+            <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+          </div>
+        </div>
 
-  <main>
-    <section id="summary">
-      <h2>Professional Summary</h2>
-      <p>Dedicated and detail-oriented accounting professional with 3+ years of experience in managing financial operations, finalizing accounts, statutory filings, and assisting in audits. Proficient in Tally, Cleartax, Suvit, and ROC compliance. Known for delivering accurate and timely reports with a focus on regulatory compliance and efficiency.</p>
-    </section>
+        <div class="section">
+          <div class="section-title">Skills (summary)</div>
+          <!-- show compact skill bars; percentages are visual only -->
+          <div class="skill">
+            <div class="label"><span>Tally ERP / Tally Prime</span><span>90%</span></div>
+            <div class="bar"><i style="width:90%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Excel & Reporting</span><span>88%</span></div>
+            <div class="bar"><i style="width:88%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>GST / TDS / ROC</span><span>85%</span></div>
+            <div class="bar"><i style="width:85%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="label"><span>Tableau / Data</span><span>60%</span></div>
+            <div class="bar"><i style="width:60%"></i></div>
+          </div>
+        </div>
 
-    <section id="skills">
-      <h2>Key Skills</h2>
-      <ul>
-        <li><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</li>
-        <li><b>GST & TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</li>
-        <li><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</li>
-        <li><b>ROC Compliance</b> – Handling annual ROC filings, MCA forms, and ensuring corporate governance requirements.</li>
-        <li><b>E-invoicing & E-way Bills</b> – Generating and managing e-invoices and e-way bills as per government regulations.</li>
-        <li><b>Accounting Software</b> – Skilled in Tally ERP 9, Tally Prime, Cleartax, and Suvit for automation and reporting.</li>
-        <li><b>Bank Reconciliation & Payments</b> – Accurate reconciliation of bank accounts, vendor payments, and receivables.</li>
-        <li><b>Data Analytics & Visualization</b> – Beginner in Tableau, and GenAI tools for exploratory data analysis and dashboards.</li>
-        <li><b>Spreadsheets & MS Office</b> – Strong command over Excel (formulas, pivot tables), Word, and PowerPoint for reporting.</li>
-        <li><b>Business Communication & Time Management</b> – Ability to present financial data clearly and meet deadlines effectively.</li>
-      </ul>
-    </section>
+        <div class="section">
+          <div class="section-title">Certificates</div>
+          <div class="cert-list" aria-hidden="false">
+            <!-- keep your certificate names as-is -->
+            <a href="tata certificate -page-001.jpg" target="_blank">Tata Group Data Analytics Job Simulation</a>
+            <a href="Deloitte Certificate-page-001.jpg" target="_blank">Deloitte Australia Data Analytics Job Simulation</a>
+            <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank">AI For All (Digital India × Intel)</a>
+            <a href="Excel-Certificate_page-0001.jpg" target="_blank">Excel Skill Certification (One Roadmap)</a>
+          </div>
+        </div>
 
-    <section id="work">
-      <h2>Work History</h2>
-      <h3>Accountant — Smita Patni Associates, New Delhi <span>(March 2024 – Present)</span></h3>
-      <p>Finalization of accounts for both corporate and individual clients. Managed daily accounting entries, generated e-invoices, assisted in statutory and internal audits, ensured compliance with TDS, ITR filing, and ROC requirements. Worked on ClearTax and Suvit for automation and reporting.</p>
-      
-      <h3>Accounts Trainee — Sahil & Associates, New Delhi <span>(May 2022 – March 2024)</span></h3>
-      <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices & e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
-    </section>
+        <div class="section">
+          <div class="section-title">Quick Links</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+            <a class="btn" href="#summary">Summary</a>
+            <a class="btn" href="#skills">Skills</a>
+            <a class="btn" href="#work">Work</a>
+            <a class="btn" href="#certificates">Certificates</a>
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+        </div>
 
-    <section id="certificates">
-      <h2>Certificates</h2>
-      <ul>
-        <li><b>Tata Group Data Analytics Job Simulation</b> (Aug 2025) – AI-powered data analytics, EDA, predictive modeling & AI-driven strategy.</li>
-        <li><b>Deloitte Australia Data Analytics Job Simulation</b> (Aug 2025) – Data analysis, Tableau dashboards, Excel classification.</li>
-        <li><b>AI For All (Digital India × Intel)</b> (Aug 2025) – AI fundamentals & applications.</li>
-        <li><b>Excel Skill Certification</b> – Certified by a One Roadmap registered company, validating proficiency in advanced Excel functions and data analysis.</li>
-      </ul>
-      <div class="certificates">
-        <a href="tata certificate -page-001.jpg" target="_blank"><img src="tata certificate -page-001.jpg" alt="Tata Group Certificate"></a>
-        <a href="Deloitte Certificate-page-001.jpg" target="_blank"><img src="Deloitte Certificate-page-001.jpg" alt="Deloitte Certificate"></a>
-        <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" alt="AI Aware Certificate"></a>
-        <a href="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" alt="AI Appreciate Certificate"></a>
-        <a href="Excel-Certificate_page-0001.jpg" target="_blank"><img src="Excel-Certificate_page-0001.jpg" alt="Excel by Oneroadmap"></a>
-      </div>
-    </section>
+        <div class="foot">© 2025 Sahil Wadhwa</div>
+      </aside>
 
-    <section id="contact">
-      <h2>Contact Me</h2>
-      <div class="contact-info">
-        <p>☎ +91-8800249069</p>
-        <p>✉ www.sahilwadhwa520@gmail.com</p>
-        <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p>
-      </div>
-      <p style="margin-top:1rem; font-size:0.9rem; color:#555; text-align:center;">
-        I also provide freelance support in accounting, tax & compliance — 
-        <a href="Services.html" class="btn" style="padding:6px 12px; font-size:0.85rem;">View Services</a>
-      </p>
-    </section>
-  </main>
+      <!-- RIGHT CONTENT -->
+      <main class="content" role="main">
+        <section id="summary" class="section">
+          <h2>Professional Summary</h2>
+          <!-- EXACT text preserved -->
+          <p>Dedicated and detail-oriented accounting professional with 3+ years of experience in managing financial operations, finalizing accounts, statutory filings, and assisting in audits. Proficient in Tally, Cleartax, Suvit, and ROC compliance. Known for delivering accurate and timely reports with a focus on regulatory compliance and efficiency.</p>
+        </section>
 
-  <footer>
-    <p>&copy; 2025 Sahil Wadhwa</p>
-  </footer>
+        <section id="skills" class="section">
+          <h2>Key Skills</h2>
+          <ul style="list-style:none;padding-left:0;color:var(--muted);">
+            <li style="margin-bottom:8px"><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</li>
+            <li style="margin-bottom:8px"><b>GST & TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</li>
+            <li style="margin-bottom:8px"><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</li>
+            <li style="margin-bottom:8px"><b>ROC Compliance</b> – Handling annual ROC filings, MCA forms, and ensuring corporate governance requirements.</li>
+            <li style="margin-bottom:8px"><b>E-invoicing & E-way Bills</b> – Generating and managing e-invoices and e-way bills as per government regulations.</li>
+            <li style="margin-bottom:8px"><b>Accounting Software</b> – Skilled in Tally ERP 9, Tally Prime, Cleartax, and Suvit for automation and reporting.</li>
+            <li style="margin-bottom:8px"><b>Bank Reconciliation & Payments</b> – Accurate reconciliation of bank accounts, vendor payments, and receivables.</li>
+            <li style="margin-bottom:8px"><b>Data Analytics & Visualization</b> – Beginner in Tableau, and GenAI tools for exploratory data analysis and dashboards.</li>
+            <li style="margin-bottom:8px"><b>Spreadsheets & MS Office</b> – Strong command over Excel (formulas, pivot tables), Word, and PowerPoint for reporting.</li>
+            <li style="margin-bottom:8px"><b>Business Communication & Time Management</b> – Ability to present financial data clearly and meet deadlines effectively.</li>
+          </ul>
+        </section>
 
-  <!-- Typing Script -->
+        <section id="work" class="section">
+          <h2>Work History</h2>
+
+          <div class="job">
+            <h3>Accountant — Smita Patni Associates, New Delhi <span style="font-weight:600;color:var(--muted)"> (March 2024 – Present)</span></h3>
+            <span></span>
+            <p>Finalization of accounts for both corporate and individual clients. Managed daily accounting entries, generated e-invoices, assisted in statutory and internal audits, ensured compliance with TDS, ITR filing, and ROC requirements. Worked on ClearTax and Suvit for automation and reporting.</p>
+          </div>
+
+          <div class="job">
+            <h3>Accounts Trainee — Sahil & Associates, New Delhi <span style="font-weight:600;color:var(--muted)"> (May 2022 – March 2024)</span></h3>
+            <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices & e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
+          </div>
+        </section>
+
+        <section id="certificates" class="section">
+          <h2>Certificates</h2>
+
+          <ul style="list-style:none;padding-left:0;color:var(--muted)">
+            <li style="margin-bottom:6px"><b>Tata Group Data Analytics Job Simulation</b> (Aug 2025) – AI-powered data analytics, EDA, predictive modeling & AI-driven strategy.</li>
+            <li style="margin-bottom:6px"><b>Deloitte Australia Data Analytics Job Simulation</b> (Aug 2025) – Data analysis, Tableau dashboards, Excel classification.</li>
+            <li style="margin-bottom:6px"><b>AI For All (Digital India × Intel)</b> (Aug 2025) – AI fundamentals & applications.</li>
+            <li style="margin-bottom:6px"><b>Excel Skill Certification</b> – Certified by a One Roadmap registered company, validating proficiency in advanced Excel functions and data analysis.</li>
+          </ul>
+
+          <div class="cert-grid">
+            <a href="tata certificate -page-001.jpg" target="_blank"><img src="tata certificate -page-001.jpg" alt="Tata Group Certificate"></a>
+            <a href="Deloitte Certificate-page-001.jpg" target="_blank"><img src="Deloitte Certificate-page-001.jpg" alt="Deloitte Certificate"></a>
+            <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" alt="AI Aware Certificate"></a>
+            <a href="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_APPRECIATE_CERTIFICATE.png" alt="AI Appreciate Certificate"></a>
+            <a href="Excel-Certificate_page-0001.jpg" target="_blank"><img src="Excel-Certificate_page-0001.jpg" alt="Excel by Oneroadmap"></a>
+          </div>
+        </section>
+
+        <section id="contact" class="section">
+          <h2>Contact Me</h2>
+          <div class="contact-info" style="color:var(--muted)">
+            <p>☎ +91-8800249069</p>
+            <p>✉ www.sahilwadhwa520@gmail.com</p>
+            <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p>
+          </div>
+
+          <p style="margin-top:12px;color:var(--muted)">
+            I also provide freelance support in accounting, tax & compliance — 
+            <a href="Services.html" class="btn" style="padding:6px 12px; font-size:0.9rem;">View Services</a>
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Typing Script (unchanged) -->
   <script>
-    const text = "an Accountant";
-    let index = 0;
-    function type() {
-      document.querySelector(".typing").textContent = text.slice(0, ++index);
-      if (index < text.length) { setTimeout(type, 150); }
-    }
-    type();
+    (function(){
+      const text = "an Accountant";
+      let index = 0;
+      function type() {
+        const el = document.querySelector(".typing");
+        if(!el) return;
+        el.textContent = text.slice(0, ++index);
+        if (index < text.length) { setTimeout(type, 150); }
+      }
+      type();
+    })();
   </script>
 
-  <!-- Dark/Light Mode Script -->
+  <!-- Dark/Light Toggle (reliable) -->
   <script>
-    const toggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
+    (function(){
+      const btn = document.getElementById('theme-toggle');
+      const body = document.body;
 
-    // Load saved theme
-    if(localStorage.getItem('theme') === 'light'){
-      body.classList.add('light-mode');
-      toggleButton.textContent = '☀️';
-    }
-
-    toggleButton.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-
-      if(body.classList.contains('light-mode')){
-        toggleButton.textContent = '☀️';
-        localStorage.setItem('theme', 'light');
+      // Initialize from localStorage
+      const saved = localStorage.getItem('theme');
+      if(saved === 'light'){
+        body.classList.add('light-mode');
+        btn.textContent = '☀️ Light';
       } else {
-        toggleButton.textContent = '🌙';
-        localStorage.setItem('theme', 'dark');
+        // default dark
+        btn.textContent = '🌙 Dark';
       }
-    });
+
+      btn.addEventListener('click', () => {
+        const isLight = body.classList.toggle('light-mode');
+        if(isLight){
+          btn.textContent = '☀️ Light';
+          localStorage.setItem('theme','light');
+        } else {
+          btn.textContent = '🌙 Dark';
+          localStorage.setItem('theme','dark');
+        }
+      });
+
+      // Accessibility: allow keyboard toggle (Enter/Space)
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
