@@ -5,193 +5,254 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Sahil Wadhwa - Portfolio / Resume</title>
 
-  <!-- Minimal reset + professional styling -->
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg-dark: #0b0b0b;
-      --panel-dark: #0f1113;
-      --muted: #bfc7c0;
-      --emerald: #2ecc71;
-      --emerald-dark: #27ae60;
-      --glass: rgba(255,255,255,0.03);
-      --accent-shadow: 0 8px 30px rgba(46,204,113,0.08);
+      /* Gold themed variables */
+      --gold: #d4af37;
+      --gold-dark: #b88922;
+      --bg-dark: #0f1113;      /* dark bg */
+      --panel-dark: #121212;
+      --text-light: #eaeaea;
+      --muted-light: #bfc7c0;
+      --bg-light: #ffffff;     /* light bg */
+      --panel-light: #ffffff;
+      --text-dark: #222222;
+      --muted-dark: #556256;
+      --glass-dark: rgba(255,255,255,0.03);
+      --glass-light: rgba(0,0,0,0.03);
       --container-width: 1100px;
+      --radius: 12px;
+      --card-shadow-dark: 0 8px 30px rgba(0,0,0,0.45);
+      --card-shadow-light: 0 8px 30px rgba(212,175,55,0.06);
     }
 
-    /* Light mode variables (applied when body.light-mode present) */
-    body.light-mode {
-      --bg-dark: #f6fbf7;
-      --panel-dark: #ffffff;
-      --muted: #556256;
-      --glass: rgba(0,0,0,0.02);
-      --accent-shadow: 0 8px 24px rgba(39,174,96,0.08);
-    }
-
+    /* Base reset */
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
       background: var(--bg-dark);
-      color: #eaeaea;
+      color: var(--text-light);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-      transition: background .32s ease, color .32s ease;
+      line-height:1.55;
+      transition: background .36s ease, color .36s ease;
     }
 
-    /* Container */
+    /* Light theme overrides (applied when body has class 'theme-light') */
+    body.theme-light{
+      background: var(--bg-light);
+      color: var(--text-dark);
+    }
+
+    /* Containers */
     .wrap{
-      width: min(var(--container-width), 92%);
-      margin: 36px auto;
+      width: min(var(--container-width), 94%);
+      margin: 28px auto;
     }
 
-    /* Top bar (small header) */
+    /* Topbar (brand + toggle) */
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      margin-bottom:18px;
+      margin-bottom:20px;
     }
-    .brand{
-      display:flex; gap:12px; align-items:center;
-    }
-    .avatar{
-      width:68px;height:68px;border-radius:12px; overflow:hidden;
-      border:2px solid rgba(255,255,255,0.06);
-      box-shadow:var(--accent-shadow);
-      background:linear-gradient(135deg,var(--emerald),var(--emerald-dark));
-      display:flex; align-items:center; justify-content:center;
-    }
-    .avatar img{width:100%;height:100%;object-fit:cover; display:block}
-    .brand h1{font-size:1.15rem;margin:0;color:var(--emerald); letter-spacing:0.2px}
-    .brand p{margin:0;font-size:0.85rem;color:var(--muted)}
 
-    /* Theme toggle */
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .avatar{
+      width:74px; height:74px; border-radius:14px; overflow:hidden;
+      border:2px solid rgba(255,255,255,0.06);
+      background: linear-gradient(135deg,var(--gold),var(--gold-dark));
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: var(--card-shadow-dark);
+    }
+    body.theme-light .avatar{ box-shadow: var(--card-shadow-light); border-color: rgba(0,0,0,0.06); }
+
+    .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    .brand h1{
+      font-size:1.15rem;
+      margin:0;
+      color: var(--gold);
+      font-weight:700;
+      font-family: "Playfair Display", serif;
+      letter-spacing:0.2px;
+    }
+    .brand p{
+      margin:0;
+      font-size:0.87rem;
+      color: var(--muted-light);
+    }
+    body.theme-light .brand p{ color: var(--muted-dark); }
+
+    /* Theme toggle button (sun/moon) */
     #theme-toggle{
-      --btn-pad:10px 12px;
-      border-radius:999px;
-      padding:var(--btn-pad);
-      background:transparent;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:10px;
       border:1px solid rgba(255,255,255,0.06);
-      color:var(--emerald);
-      display:inline-flex; align-items:center; gap:8px;
+      background: transparent;
+      color: var(--gold);
       cursor:pointer;
-      font-size:0.95rem;
-      box-shadow:none;
+      font-weight:600;
+      z-index:3000;
       transition: all .22s ease;
     }
-    #theme-toggle:hover{ transform:translateY(-2px); box-shadow:var(--accent-shadow)}
-    body.light-mode #theme-toggle{ color:var(--emerald-dark); border-color: rgba(0,0,0,0.06) }
+    #theme-toggle .icon { font-size:1.05rem; }
+    #theme-toggle:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    body.theme-light #theme-toggle{
+      border-color: rgba(0,0,0,0.08);
+      color: var(--gold-dark);
+    }
 
-    /* Layout: two columns */
+    /* Layout: sidebar + main */
     .layout{
       display:grid;
       grid-template-columns: 320px 1fr;
-      gap:28px;
+      gap:30px;
       align-items:start;
     }
 
-    /* Left column - sidebar */
+    /* Sidebar */
     .sidebar{
-      background:var(--panel-dark);
-      border-radius:12px;
+      background: var(--panel-dark);
+      border-radius: var(--radius);
       padding:18px;
-      box-shadow:var(--accent-shadow);
-      transition: background .32s ease;
+      box-shadow: var(--card-shadow-dark);
+      transition: background .32s ease, box-shadow .32s;
     }
-    .section-title{ font-size:0.95rem; color:var(--emerald); margin-bottom:8px; font-weight:600 }
-    .contact-list p{ margin:8px 0; color:var(--muted); font-size:0.95rem }
-    .contact-list a{ color:var(--emerald); text-decoration:none; font-weight:600 }
-
-    .skill{
-      display:flex; flex-direction:column; gap:8px; margin-bottom:12px;
+    body.theme-light .sidebar{
+      background: var(--panel-light);
+      box-shadow: var(--card-shadow-light);
+      border: 1px solid rgba(0,0,0,0.04);
     }
-    .skill .label{ font-size:0.9rem; color:var(--muted); display:flex; justify-content:space-between; }
-    .skill .bar{ height:8px; background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:6px; overflow:hidden }
-    .skill .bar > i{ display:block; height:100%; background:linear-gradient(90deg, var(--emerald), var(--emerald-dark)); border-radius:6px }
 
-    .cert-list{ display:grid; gap:8px; margin-top:10px }
-    .cert-list a{ display:block; text-decoration:none; color:var(--muted); font-size:0.9rem; padding:8px; border-radius:8px; background:var(--glass); transition:background .2s }
-    .cert-list a:hover{ background: rgba(46,204,113,0.04); color:var(--emerald) }
+    .section-title{
+      font-size:0.95rem;
+      color: var(--gold);
+      margin-bottom:10px;
+      font-weight:700;
+      letter-spacing:0.2px;
+    }
 
-    /* Right column - main content */
+    .contact-list p{ margin:8px 0; color: var(--muted-light); font-size:0.95rem; }
+    body.theme-light .contact-list p{ color: var(--muted-dark); }
+    .contact-list a{ color:var(--gold); text-decoration:none; font-weight:700; }
+
+    /* Skills (left kept as original with bars + percentages to preserve details) */
+    .skill{ display:flex; flex-direction:column; gap:10px; margin-bottom:14px; }
+    .skill .label{ font-size:0.9rem; color:var(--muted-light); display:flex; justify-content:space-between; }
+    body.theme-light .skill .label{ color:var(--muted-dark); }
+    .skill .bar{ height:8px; background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:6px; overflow:hidden; }
+    .skill .bar > i{ display:block; height:100%; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); border-radius:6px; transition: width .6s ease; }
+
+    /* Certificates list */
+    .cert-list{ display:grid; gap:8px; margin-top:10px; }
+    .cert-list a{
+      display:block; text-decoration:none; color:var(--muted-light); font-size:0.92rem;
+      padding:8px; border-radius:8px; background: var(--glass-dark); transition: background .18s, color .18s;
+    }
+    body.theme-light .cert-list a{ background: var(--glass-light); color: var(--muted-dark); }
+    .cert-list a:hover{ background: rgba(212,175,55,0.06); color: var(--gold); }
+
+    .quick-links{ display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+    .btn{ display:inline-block; background: transparent; color:var(--gold); border: 1px solid rgba(255,255,255,0.06); padding:8px 12px; border-radius:8px; text-decoration:none; font-weight:600; transition: all .18s; text-align:center; }
+    body.theme-light .btn{ border-color: rgba(0,0,0,0.06); color: var(--gold-dark); }
+    .btn:hover{ background: rgba(212,175,55,0.06); color: #000; }
+
+    .foot{ text-align:center; margin-top:18px; color:var(--muted-light); font-size:0.9rem; }
+    body.theme-light .foot{ color:var(--muted-dark); }
+
+    /* Main content */
     .content{
-      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
-      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+      border-radius: var(--radius);
       padding:22px;
-      box-shadow:var(--accent-shadow);
-      transition: background .32s ease;
+      box-shadow: var(--card-shadow-dark);
+      transition: background .32s ease, box-shadow .32s ease;
     }
+    body.theme-light .content{ background: rgba(255,255,255,0.9); box-shadow: var(--card-shadow-light); border: 1px solid rgba(0,0,0,0.04); }
 
-    .section{ margin-bottom:18px }
-    .section h2{ margin:0 0 12px 0; font-size:1.15rem; color:var(--emerald); text-shadow: 0 6px 20px rgba(46,204,113,0.06) }
+    .section{ margin-bottom:20px; }
+    .section h2{
+      margin:0 0 12px 0;
+      font-size:1.15rem;
+      color:var(--gold);
+      font-family: "Playfair Display", serif;
+      letter-spacing:0.2px;
+    }
+    .section h2::after{ content:""; display:block; width:56px; height:3px; background:var(--gold); margin-top:8px; border-radius:3px; }
 
-    /* Experience */
-    .job{ margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed rgba(255,255,255,0.03) }
-    .job h3{ margin:0; font-size:1rem; color:#fff }
-    .job span{ display:block; font-size:0.85rem; color:var(--muted); margin-top:6px }
-    .job p{ margin:10px 0 0 0; color:var(--muted); line-height:1.55 }
+    .job{ margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed rgba(255,255,255,0.03); }
+    body.theme-light .job{ border-bottom:1px dashed rgba(0,0,0,0.06); }
+    .job h3{ margin:0; font-size:1rem; color: inherit; }
+    .job span{ display:block; font-size:0.85rem; color: var(--muted-light); margin-top:6px; }
+    body.theme-light .job span{ color: var(--muted-dark); }
+    .job p{ margin:10px 0 0 0; color: var(--muted-light); line-height:1.6; }
+    body.theme-light .job p{ color: var(--text-dark); }
 
-    /* Certificates gallery */
-    .cert-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px }
-    .cert-grid a{ display:block; border-radius:10px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,0.03) }
+    /* Certificate thumbnails grid */
+    .cert-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-top:12px; }
+    .cert-grid a{ display:block; border-radius:10px; overflow:hidden; background:#000; border:1px solid rgba(255,255,255,0.03); }
     .cert-grid img{ width:100%; height:120px; object-fit:cover; display:block; }
 
-    /* Buttons */
-    .btn{
-      display:inline-block;
-      background: transparent;
-      color:var(--emerald);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding:8px 12px;
-      border-radius:8px;
-      text-decoration:none;
-      font-weight:600;
-      transition: all .18s;
-    }
-    .btn:hover{ background: rgba(46,204,113,0.06) }
-
-    /* Footer */
-    .foot{ text-align:center; margin-top:18px; color:var(--muted); font-size:0.9rem }
+    /* Typing effect */
+    .typing{ color: var(--gold); font-weight:700; border-right: 3px solid var(--gold); padding-right:6px; white-space:nowrap; overflow:hidden; }
 
     /* Responsive */
-    @media (max-width: 940px){
+    @media (max-width:980px){
       .layout{ grid-template-columns: 1fr; }
       .sidebar{ order:2 }
       .content{ order:1 }
       .avatar{ width:84px; height:84px }
     }
 
-    /* Ensure text visible in light mode */
-    body.light-mode { color:#1a1a1a }
-    body.light-mode .sidebar { background: var(--panel-dark); box-shadow: var(--accent-shadow) }
-    body.light-mode .content { background: var(--panel-dark); box-shadow: var(--accent-shadow) }
-    body.light-mode header { color: #1a1a1a }
+    /* small tweaks for light/dark specific colors */
+    body.theme-light{ --muted-light: var(--muted-dark); --glass-dark: var(--glass-light); --text-light: var(--text-dark); }
   </style>
 </head>
-<body>
+<body class="theme-dark">
   <div class="wrap">
-    <!-- top -->
+    <!-- topbar -->
     <div class="topbar">
       <div class="brand">
         <div class="avatar">
-          <!-- Keep your photo path; if missing, it'll show gradient -->
           <img src="447249813_1203509420712582_6993872872281139809_n..webp.jpg" alt="Sahil Wadhwa">
         </div>
         <div>
           <h1>Hi, I am Sahil Wadhwa</h1>
-          <p>Dedicated Accounting Professional • Automation & Data Enthusiast</p>
+          <!-- tagline underline in gold -->
+          <p style="margin-top:6px;font-size:0.95rem;color:var(--muted-light)">
+            <span style="font-weight:600;color:inherit;">Turning Numbers into Insights</span>
+          </p>
         </div>
       </div>
 
       <div>
-        <button id="theme-toggle" aria-label="Toggle theme">🌙 Dark</button>
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <span class="icon">🌙</span>
+          <span class="label">Dark</span>
+        </button>
       </div>
     </div>
 
-    <!-- main layout -->
+    <!-- layout -->
     <div class="layout">
       <!-- LEFT SIDEBAR -->
       <aside class="sidebar" aria-label="Sidebar">
@@ -206,19 +267,23 @@
 
         <div class="section">
           <div class="section-title">Skills (summary)</div>
-          <!-- show compact skill bars; percentages are visual only -->
+
+          <!-- KEEPING the exact skill entries + percentages as you provided -->
           <div class="skill">
             <div class="label"><span>Tally ERP / Tally Prime</span><span>90%</span></div>
             <div class="bar"><i style="width:90%"></i></div>
           </div>
+
           <div class="skill">
             <div class="label"><span>Excel & Reporting</span><span>88%</span></div>
             <div class="bar"><i style="width:88%"></i></div>
           </div>
+
           <div class="skill">
             <div class="label"><span>GST / TDS / ROC</span><span>85%</span></div>
             <div class="bar"><i style="width:85%"></i></div>
           </div>
+
           <div class="skill">
             <div class="label"><span>Tableau / Data</span><span>60%</span></div>
             <div class="bar"><i style="width:60%"></i></div>
@@ -228,7 +293,6 @@
         <div class="section">
           <div class="section-title">Certificates</div>
           <div class="cert-list" aria-hidden="false">
-            <!-- keep your certificate names as-is -->
             <a href="tata certificate -page-001.jpg" target="_blank">Tata Group Data Analytics Job Simulation</a>
             <a href="Deloitte Certificate-page-001.jpg" target="_blank">Deloitte Australia Data Analytics Job Simulation</a>
             <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank">AI For All (Digital India × Intel)</a>
@@ -238,7 +302,7 @@
 
         <div class="section">
           <div class="section-title">Quick Links</div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
+          <div class="quick-links">
             <a class="btn" href="#summary">Summary</a>
             <a class="btn" href="#skills">Skills</a>
             <a class="btn" href="#work">Work</a>
@@ -260,7 +324,7 @@
 
         <section id="skills" class="section">
           <h2>Key Skills</h2>
-          <ul style="list-style:none;padding-left:0;color:var(--muted);">
+          <ul style="list-style:none;padding-left:0;color:var(--muted-light);">
             <li style="margin-bottom:8px"><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</li>
             <li style="margin-bottom:8px"><b>GST & TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</li>
             <li style="margin-bottom:8px"><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</li>
@@ -278,13 +342,13 @@
           <h2>Work History</h2>
 
           <div class="job">
-            <h3>Accountant — Smita Patni Associates, New Delhi <span style="font-weight:600;color:var(--muted)"> (March 2024 – Present)</span></h3>
+            <h3>Accountant — Smita Patni Associates, New Delhi <span style="font-weight:600;color:var(--muted-light)"> (March 2024 – Present)</span></h3>
             <span></span>
             <p>Finalization of accounts for both corporate and individual clients. Managed daily accounting entries, generated e-invoices, assisted in statutory and internal audits, ensured compliance with TDS, ITR filing, and ROC requirements. Worked on ClearTax and Suvit for automation and reporting.</p>
           </div>
 
           <div class="job">
-            <h3>Accounts Trainee — Sahil & Associates, New Delhi <span style="font-weight:600;color:var(--muted)"> (May 2022 – March 2024)</span></h3>
+            <h3>Accounts Trainee — Sahil & Associates, New Delhi <span style="font-weight:600;color:var(--muted-light)"> (May 2022 – March 2024)</span></h3>
             <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices & e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
           </div>
         </section>
@@ -292,7 +356,7 @@
         <section id="certificates" class="section">
           <h2>Certificates</h2>
 
-          <ul style="list-style:none;padding-left:0;color:var(--muted)">
+          <ul style="list-style:none;padding-left:0;color:var(--muted-light)">
             <li style="margin-bottom:6px"><b>Tata Group Data Analytics Job Simulation</b> (Aug 2025) – AI-powered data analytics, EDA, predictive modeling & AI-driven strategy.</li>
             <li style="margin-bottom:6px"><b>Deloitte Australia Data Analytics Job Simulation</b> (Aug 2025) – Data analysis, Tableau dashboards, Excel classification.</li>
             <li style="margin-bottom:6px"><b>AI For All (Digital India × Intel)</b> (Aug 2025) – AI fundamentals & applications.</li>
@@ -310,13 +374,13 @@
 
         <section id="contact" class="section">
           <h2>Contact Me</h2>
-          <div class="contact-info" style="color:var(--muted)">
+          <div class="contact-info" style="color:var(--muted-light)">
             <p>☎ +91-8800249069</p>
             <p>✉ www.sahilwadhwa520@gmail.com</p>
             <p><a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" class="btn">LinkedIn Profile</a></p>
           </div>
 
-          <p style="margin-top:12px;color:var(--muted)">
+          <p style="margin-top:12px;color:var(--muted-light)">
             I also provide freelance support in accounting, tax & compliance — 
             <a href="Services.html" class="btn" style="padding:6px 12px; font-size:0.9rem;">View Services</a>
           </p>
@@ -340,34 +404,44 @@
     })();
   </script>
 
-  <!-- Dark/Light Toggle (reliable) -->
+  <!-- Theme toggle logic + persistence + icon swap -->
   <script>
     (function(){
-      const btn = document.getElementById('theme-toggle');
       const body = document.body;
+      const btn = document.getElementById('theme-toggle');
+      const iconSpan = btn.querySelector('.icon');
+      const labelSpan = btn.querySelector('.label');
 
-      // Initialize from localStorage
-      const saved = localStorage.getItem('theme');
+      // Load saved theme
+      const saved = localStorage.getItem('site-theme') || 'dark';
       if(saved === 'light'){
-        body.classList.add('light-mode');
-        btn.textContent = '☀️ Light';
+        body.classList.remove('theme-dark');
+        body.classList.add('theme-light');
+        iconSpan.textContent = '🌞';
+        labelSpan.textContent = 'Light';
       } else {
-        // default dark
-        btn.textContent = '🌙 Dark';
+        body.classList.remove('theme-light');
+        body.classList.add('theme-dark');
+        iconSpan.textContent = '🌙';
+        labelSpan.textContent = 'Dark';
       }
 
       btn.addEventListener('click', () => {
-        const isLight = body.classList.toggle('light-mode');
+        const isLight = body.classList.toggle('theme-light');
         if(isLight){
-          btn.textContent = '☀️ Light';
-          localStorage.setItem('theme','light');
+          body.classList.remove('theme-dark');
+          iconSpan.textContent = '🌞';
+          labelSpan.textContent = 'Light';
+          localStorage.setItem('site-theme','light');
         } else {
-          btn.textContent = '🌙 Dark';
-          localStorage.setItem('theme','dark');
+          body.classList.add('theme-dark');
+          iconSpan.textContent = '🌙';
+          labelSpan.textContent = 'Dark';
+          localStorage.setItem('site-theme','dark');
         }
       });
 
-      // Accessibility: allow keyboard toggle (Enter/Space)
+      // keyboard accessibility
       btn.addEventListener('keydown', (e) => {
         if(e.key === 'Enter' || e.key === ' '){
           e.preventDefault();
