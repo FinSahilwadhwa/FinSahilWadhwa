@@ -18,7 +18,6 @@
       /* Dark theme */
       --bg: #0b0c0f;
       --surface: #101216;
-      --surface-2: #0f1114;
       --text: #e8eaee;
       --muted: #a9b0b6;
       --border: rgba(255,255,255,0.06);
@@ -27,59 +26,79 @@
       /* Layout */
       --wrap: 1100px;
       --radius: 14px;
-      --radius-sm: 10px;
       --pad: 22px;
+      --nav-height: 64px;
     }
 
     /* Light theme overrides */
     body.light {
       --bg: #fbfbfd;
       --surface: #ffffff;
-      --surface-2: #ffffff;
       --text: #15171a;
       --muted: #5b6168;
       --border: rgba(0,0,0,0.08);
       --shadow: 0 10px 40px rgba(212,175,55,0.10);
     }
 
-    /* Base */
-    *{ box-sizing:border-box }
-    html,body{ height:100% }
+    /* Base reset */
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1000px 600px at 20% -10%, rgba(212,175,55,0.08), transparent 60%) ,
-                  radial-gradient(900px 500px at 120% 10%, rgba(212,175,55,0.06), transparent 60%) ,
-                  var(--bg);
+      background:
+        radial-gradient(1000px 600px at 20% -10%, rgba(212,175,55,0.08), transparent 60%),
+        radial-gradient(900px 500px at 120% 10%, rgba(212,175,55,0.06), transparent 60%),
+        var(--bg);
       color: var(--text);
       line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
       transition: background .35s ease, color .35s ease;
+      padding-top: var(--nav-height); /* room for sticky nav */
     }
 
-    a{ color: var(--gold); text-decoration:none }
-    a:hover{ text-decoration:underline }
+    a { color: var(--gold); text-decoration:none; }
+    a:hover { text-decoration:underline; }
 
-    .wrap{ width:min(var(--wrap), 94%); margin: 28px auto 52px }
+    .wrap { width:min(var(--wrap), 94%); margin: 28px auto 52px; }
 
-    /* Top navigation */
-    .nav{
-      position: sticky; top: 0; z-index: 10;
-      backdrop-filter: blur(10px);
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1200;
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.00));
-      padding: 10px 0;
+      border-bottom: 1px solid transparent;
     }
-    body.light .nav{
-      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.55));
+    body.light .nav {
+      background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
       border-bottom: 1px solid var(--border);
     }
     .nav-inner{
-      width:min(var(--wrap), 94%); margin:0 auto;
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      width:min(var(--wrap), 94%);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
     .brand{
-      display:flex; align-items:center; gap:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-weight:700;
-      letter-spacing:.2px;
+    }
+    .brand .mark{
+      width:12px; height:12px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, var(--gold), var(--gold-2));
+      box-shadow:0 0 0 6px rgba(212,175,55,0.10);
     }
     .brand em{
       font-family:"Playfair Display", serif;
@@ -87,34 +106,82 @@
       color: var(--gold);
       font-weight:600;
     }
+
+    /* nav links + hamburger */
+    .nav-controls{ display:flex; align-items:center; gap:10px; }
     .nav-links{
-      display:flex; align-items:center; gap:14px;
+      display:flex;
+      gap:8px;
+      align-items:center;
     }
     .nav-links a{
-      padding:8px 12px; border-radius:10px; border:1px solid transparent;
+      padding:8px 12px;
+      border-radius:10px;
       color: var(--text);
+      font-weight:600;
+      font-size:0.95rem;
+      white-space:nowrap;
     }
     .nav-links a:hover{
-      border-color: var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.03));
+      background: rgba(255,255,255,0.02);
+      border:1px solid var(--border);
+    }
+    .toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background: transparent;
+      color: var(--gold);
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    /* Mobile: hamburger button */
+    .hamburger{
+      display:none;
+      width:42px; height:42px; border-radius:8px;
+      border:1px solid transparent;
+      background:transparent;
+      align-items:center; justify-content:center;
+      cursor:pointer;
+    }
+    .hamburger:focus{ outline:2px solid rgba(212,175,55,0.14) }
+
+    /* Mobile menu panel */
+    .mobile-menu{
+      display:none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.95));
+      padding: 12px;
+      z-index:1100;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a{
+      display:block;
+      padding:10px 12px;
+      border-radius:10px;
+      color: var(--text);
+      font-weight:600;
       text-decoration:none;
     }
+    .mobile-menu a + a{ margin-top:8px; }
 
-    /* Theme toggle */
-    .toggle{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 12px; border-radius:999px; border:1px solid var(--border);
-      background: transparent; color: var(--gold); cursor:pointer; font-weight:600;
-      transition: transform .18s ease, box-shadow .18s ease; box-shadow:none;
-    }
-    .toggle:hover{ transform:translateY(-1px); box-shadow: var(--shadow) }
-
-    /* Hero */
+    /* HERO */
     .hero{
       display:grid; grid-template-columns: 280px 1fr; gap:28px; align-items:center;
-      margin-top:22px; margin-bottom:26px;
+      margin-top:8px; margin-bottom:26px;
     }
-    @media (max-width:920px){ .hero{ grid-template-columns: 1fr; text-align:center } }
+    @media (max-width:920px){
+      .hero{ grid-template-columns: 1fr; text-align:center; gap:16px }
+      .nav-links{ display:none; }
+      .hamburger{ display:flex; }
+    }
 
     .photo{
       width: 240px; height: 240px; margin: 0 auto;
@@ -224,99 +291,169 @@
     .thumbs img{ width:100%; height:120px; object-fit:cover; display:block }
     .thumbs a:hover{ box-shadow: 0 12px 30px rgba(212,175,55,0.18) }
 
-    /* Contact */
+    /* Contact form and contact area */
     .contact p{ margin:6px 0; color: var(--muted); display:flex; align-items:center; gap:10px }
-    .ico{
-      width:18px; height:18px; display:inline-block; border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, var(--gold), var(--gold-2));
+    .ico{ width:18px; height:18px; display:inline-block; border-radius:50%; background: radial-gradient(circle at 30% 30%, var(--gold), var(--gold-2)); }
+    .contact-form form{
+      margin-top:12px;
+      display:grid;
+      gap:10px;
     }
-    .cta-row{ margin-top:12px }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      font-size:0.95rem;
+      resize:vertical;
+    }
+    .contact-form button[type="submit"]{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      color: var(--gold);
+      background: transparent;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .contact-form button[type="submit"]:hover{
+      background: rgba(212,175,55,0.10);
+      transform:translateY(-2px);
+    }
+
+    /* footer and misc buttons */
+    .cta-row{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
     .btn{
       display:inline-block; padding:10px 14px; border-radius:12px;
       border:1px solid var(--border); color: var(--gold); background: transparent;
-      font-weight:700; transition: transform .18s ease, box-shadow .18s ease, background .18s;
+      font-weight:700; text-decoration:none;
     }
-    .btn:hover{ transform: translateY(-1px); background: rgba(212,175,55,0.10); text-decoration:none; box-shadow: var(--shadow) }
 
-    /* Footer */
-    .foot{
-      text-align:center; color: var(--muted); font-size:0.92rem; margin-top: 26px;
+    .foot{ text-align:center; color: var(--muted); font-size:0.92rem; margin-top: 26px; }
+
+    /* small screens tweak */
+    @media (max-width:520px){
+      .photo{ width:180px; height:180px; }
+      .hero h1{ font-size:22px; }
+      .brand span{ font-size:0.95rem; }
+      .nav-inner{ padding:0 6px; }
+      .mobile-menu{ padding:10px 8px; }
     }
   </style>
 </head>
 <body class="dark">
   <!-- NAV -->
-  <div class="nav">
+  <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
-      <div class="brand">
-        <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--gold), var(--gold-2));box-shadow:0 0 0 4px rgba(212,175,55,0.15)"></span>
+      <div class="brand" aria-hidden="false">
+        <span class="mark" aria-hidden="true"></span>
         <span><em>Sahil</em>&nbsp;Wadhwa</span>
       </div>
-      <div class="nav-links">
-        <a href="#summary">Summary</a>
-        <a href="#skills">Skills</a>
-        <a href="#work">Work</a>
-        <a href="#certificates">Certificates</a>
-        <a href="#contact">Contact</a>
-        <button id="toggleTheme" class="toggle" aria-label="Toggle theme">🌙 Dark</button>
+
+      <div class="nav-controls" aria-hidden="false">
+        <!-- normal links (desktop) -->
+        <div class="nav-links" role="menubar" aria-label="Primary">
+          <a href="#summary" role="menuitem">Summary</a>
+          <a href="#skills" role="menuitem">Skills</a>
+          <a href="#work" role="menuitem">Work</a>
+          <a href="#certificates" role="menuitem">Certificates</a>
+          <a href="#contact" role="menuitem">Contact</a>
+        </div>
+
+        <!-- theme toggle -->
+        <button id="toggleTheme" class="toggle" aria-pressed="false" title="Toggle theme">🌙 Dark</button>
+
+        <!-- hamburger (mobile) -->
+        <button id="hamburger" class="hamburger" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <!-- simple hamburger icon -->
+          <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="20" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="6" width="20" height="2" rx="1" fill="currentColor"></rect>
+            <rect y="12" width="20" height="2" rx="1" fill="currentColor"></rect>
+          </svg>
+        </button>
       </div>
     </div>
-  </div>
 
-  <div class="wrap">
+    <!-- mobile menu -->
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+      <a href="#summary">Summary</a>
+      <a href="#skills">Skills</a>
+      <a href="#work">Work</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="wrap" id="maincontent">
     <!-- HERO -->
     <section class="hero" id="home" aria-label="Intro">
-      <div class="photo">
-        <!-- Your image; path preserved -->
+      <div class="photo" aria-hidden="false">
         <img src="447249813_1203509420712582_6993872872281139809_n..webp.jpg" alt="Sahil Wadhwa">
       </div>
       <div>
         <h1>Hi, I am Sahil Wadhwa</h1>
         <p class="sub">Dedicated Accounting Professional • Automation & Data Enthusiast</p>
         <div class="tagline">Turning Numbers into Insights</div>
-        <div class="hline"></div>
+        <div class="hline" aria-hidden="true"></div>
       </div>
     </section>
 
     <!-- GRID: SUMMARY + CONTACT -->
-    <div class="grid">
+    <div class="grid" role="region" aria-label="Summary and contact">
       <!-- SUMMARY -->
       <section id="summary" class="card summary" aria-label="Professional Summary">
         <h2>Professional Summary</h2>
-        <div class="hline"></div>
+        <div class="hline" aria-hidden="true"></div>
         <p>Dedicated and detail-oriented accounting professional with 3+ years of experience in managing financial operations, finalizing accounts, statutory filings, and assisting in audits. Proficient in Tally, Cleartax, Suvit, and ROC compliance. Known for delivering accurate and timely reports with a focus on regulatory compliance and efficiency.</p>
-      </section>
         <div class="cta-row">
           <a class="btn" href="#certificates">View Certificates</a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="card contact" aria-label="Contact">
+        <h2>Contact</h2>
+        <div class="hline" aria-hidden="true"></div>
+        <p><span class="ico" aria-hidden="true"></span> ☎ +91-8800249069</p>
+        <p><span class="ico" aria-hidden="true"></span> ✉ sahilwadhwa520@gmail.com</p>
+        <p><span class="ico" aria-hidden="true"></span> <a href="https://www.linkedin.com/in/sahil-wadhwa-926503189" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+
+        <div class="cta-row">
+          <a class="btn" href="Services.html">View Services</a>
         </div>
       </section>
     </div>
 
     <!-- GRID: SKILLS + WORK -->
-    <div class="grid">
+    <div class="grid" role="region" aria-label="Skills and work">
       <!-- SKILLS -->
       <section id="skills" class="card skills" aria-label="Key Skills">
         <h2>Key Skills</h2>
-        <div class="hline"></div>
-        <!-- Same skills content, clean checklist (no % / no bars) -->
+        <div class="hline" aria-hidden="true"></div>
         <ul>
-          <li><span class="dot"></span><span><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</span></li>
-          <li><span class="dot"></span><span><b>GST & TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</span></li>
-          <li><span class="dot"></span><span><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</span></li>
-          <li><span class="dot"></span><span><b>ROC Compliance</b> – Handling annual ROC filings, MCA forms, and ensuring corporate governance requirements.</span></li>
-          <li><span class="dot"></span><span><b>E-invoicing & E-way Bills</b> – Generating and managing e-invoices and e-way bills as per government regulations.</span></li>
-          <li><span class="dot"></span><span><b>Accounting Software</b> – Skilled in Tally ERP 9, Tally Prime, Cleartax, and Suvit for automation and reporting.</span></li>
-          <li><span class="dot"></span><span><b>Bank Reconciliation & Payments</b> – Accurate reconciliation of bank accounts, vendor payments, and receivables.</span></li>
-          <li><span class="dot"></span><span><b>Data Analytics & Visualization</b> – Beginner in Tableau, and GenAI tools for exploratory data analysis and dashboards.</span></li>
-          <li><span class="dot"></span><span><b>Spreadsheets & MS Office</b> – Strong command over Excel (formulas, pivot tables), Word, and PowerPoint for reporting.</span></li>
-          <li><span class="dot"></span><span><b>Business Communication & Time Management</b> – Ability to present financial data clearly and meet deadlines effectively.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Finalization of Accounts</b> – Preparing and reviewing financial statements for corporate and individual clients with accuracy and compliance.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>GST &amp; TDS Return Filing</b> – Expertise in preparing and filing GST and TDS returns to ensure regulatory compliance.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Audit Assistance</b> – Supporting statutory and internal audits by reconciling ledgers and preparing audit schedules.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>ROC Compliance</b> – Handling annual ROC filings, MCA forms, and ensuring corporate governance requirements.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>E-invoicing &amp; E-way Bills</b> – Generating and managing e-invoices and e-way bills as per government regulations.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Accounting Software</b> – Skilled in Tally ERP 9, Tally Prime, Cleartax, and Suvit for automation and reporting.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Bank Reconciliation &amp; Payments</b> – Accurate reconciliation of bank accounts, vendor payments, and receivables.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Data Analytics &amp; Visualization</b> – Beginner in Tableau, and GenAI tools for exploratory data analysis and dashboards.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Spreadsheets &amp; MS Office</b> – Strong command over Excel (formulas, pivot tables), Word, and PowerPoint for reporting.</span></li>
+          <li><span class="dot" aria-hidden="true"></span><span><b>Business Communication &amp; Time Management</b> – Ability to present financial data clearly and meet deadlines effectively.</span></li>
         </ul>
       </section>
 
       <!-- WORK -->
       <section id="work" class="card jobs" aria-label="Work History">
         <h2>Work History</h2>
-        <div class="hline"></div>
+        <div class="hline" aria-hidden="true"></div>
 
         <div class="item">
           <h3>Accountant — Smita Patni Associates, New Delhi</h3>
@@ -327,7 +464,7 @@
         <div class="item">
           <h3>Accounts Trainee — Sahil & Associates, New Delhi</h3>
           <div class="meta">(May 2022 – March 2024)</div>
-          <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices & e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
+          <p>Maintained accounting records, filed GST/TDS/ITR returns, generated invoices &amp; e-way bills, managed payment tracking, and supported ROC compliance and MSME registration.</p>
         </div>
       </section>
     </div>
@@ -335,17 +472,17 @@
     <!-- CERTIFICATES -->
     <section id="certificates" class="card" aria-label="Certificates" style="margin-top:22px">
       <h2>Certificates</h2>
-      <div class="hline"></div>
+      <div class="hline" aria-hidden="true"></div>
 
       <div class="cert-list">
         <a href="tata certificate -page-001.jpg" target="_blank">Tata Group Data Analytics Job Simulation</a>
         <a href="Deloitte Certificate-page-001.jpg" target="_blank">Deloitte Australia Data Analytics Job Simulation</a>
         <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank">AI For All (Digital India × Intel)</a>
         <a href="Excel-Certificate_page-0001.jpg" target="_blank">Excel Skill Certification (One Roadmap)</a>
-        <a href="Certificate_sebi-0001.jpg" target="_blank">SEBI Certificate </a>
+        <a href="Certificate_sebi-0001.jpg" target="_blank">SEBI Certificate</a>
       </div>
 
-      <div class="thumbs">
+      <div class="thumbs" aria-hidden="false">
         <a href="tata certificate -page-001.jpg" target="_blank"><img src="tata certificate -page-001.jpg" alt="Tata Group Certificate"></a>
         <a href="Deloitte Certificate-page-001.jpg" target="_blank"><img src="Deloitte Certificate-page-001.jpg" alt="Deloitte Certificate"></a>
         <a href="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" target="_blank"><img src="Sahil Wadhwa_AI_AWARE_CERTIFICATE.png" alt="AI For All Certificate"></a>
@@ -354,42 +491,95 @@
         <a href="Certificate_sebi-0001.jpg" target="_blank"><img src="Certificate_sebi-0001.jpg" alt="SEBI Certificate"></a>
       </div>
     </section>
-        <!-- Contact -->
-      <section id="contact" class="card contact-form">
-        <h2>Contact</h2><div class="hline"></div>
-        <p>☎ +91-8800249069</p>
-        <p>✉ sahilwadhwa520@gmail.com</p>
-        <form action="https://formspree.io/f/mldwjbnv" method="POST">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="_replyto" placeholder="Your Email" required>
-          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </section>
+
+    <!-- Contact form (Formspree) -->
+    <section class="card contact-form" aria-label="Contact form" style="margin-top:18px">
+      <h2>Contact</h2>
+      <div class="hline" aria-hidden="true"></div>
+      <p>☎ +91-8800249069</p>
+      <p>✉ sahilwadhwa520@gmail.com</p>
+
+      <form action="https://formspree.io/f/mldwjbnv" method="POST" aria-label="Contact form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="_replyto" placeholder="Your Email" required>
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <div style="margin-top:18px">
+      <a class="btn" href="Services.html">View Services</a>
     </div>
-    <a class="btn" href="Services.html">View Services</a>
 
-    
     <p class="foot">© 2025 Sahil Wadhwa</p>
-  </div>
+  </main>
 
-  <!-- Theme toggle -->
+  <!-- JS: theme toggle, mobile menu -->
   <script>
     (function(){
       const body = document.body;
-      const btn = document.getElementById('toggleTheme');
+      const themeBtn = document.getElementById('toggleTheme');
 
-      // load saved
+      // Load saved theme
       const saved = localStorage.getItem('theme') || 'dark';
-      if(saved === 'light'){
-        body.classList.add('light'); btn.textContent = '☀️ Light';
-      } else { body.classList.remove('light'); btn.textContent = '🌙 Dark'; }
+      if (saved === 'light') {
+        body.classList.add('light');
+        themeBtn.textContent = '☀️ Light';
+        themeBtn.setAttribute('aria-pressed','true');
+      } else {
+        body.classList.remove('light');
+        themeBtn.textContent = '🌙 Dark';
+        themeBtn.setAttribute('aria-pressed','false');
+      }
 
-      btn.addEventListener('click', () => {
+      themeBtn.addEventListener('click', () => {
         const isLight = body.classList.toggle('light');
-        btn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+        themeBtn.textContent = isLight ? '☀️ Light' : '🌙 Dark';
+        themeBtn.setAttribute('aria-pressed', isLight ? 'true' : 'false');
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
       });
+
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      function closeMobileMenu(){
+        mobileMenu.style.display = 'none';
+        hamburger.setAttribute('aria-expanded','false');
+        mobileMenu.setAttribute('aria-hidden','true');
+      }
+      function openMobileMenu(){
+        mobileMenu.style.display = 'block';
+        hamburger.setAttribute('aria-expanded','true');
+        mobileMenu.setAttribute('aria-hidden','false');
+      }
+
+      // set initial mobile menu state hidden for small screens
+      closeMobileMenu();
+
+      hamburger.addEventListener('click', (e) => {
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        if (expanded) closeMobileMenu(); else openMobileMenu();
+      });
+
+      // close mobile menu on link click
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => { closeMobileMenu(); });
+      });
+
+      // Accessibility: close mobile menu on Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobileMenu();
+      });
+
+      // Improve layout on orientation change / resize: hide mobile menu if desktop
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 920) {
+          // ensure mobile menu closed
+          closeMobileMenu();
+        }
+      });
+
     })();
   </script>
 </body>
