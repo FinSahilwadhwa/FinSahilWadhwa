@@ -368,10 +368,6 @@
         <button id="toggleTheme" class="toggle" aria-pressed="false" title="Toggle theme">🌙 Dark</button
         <!-- music toggle -->
         <button id="toggleMusic" class="toggle" aria-pressed="false" title="Toggle motivational music">📻 Radio</button>
-        audio.onended = () => {
-        currentIndex = (currentIndex + 1) % songs.length;
-        audio.src = songs[currentIndex].url;
-        audio.play();
 };
         <!-- Hidden audio player -->
         <audio id="motivationalPlayer" loop preload="auto">
